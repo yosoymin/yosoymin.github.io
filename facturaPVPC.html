@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="es-ES">
+	<head>
+		<title>Factura PVPC</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1">
+		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/fontawesome.min.css" integrity="sha512-SgaqKKxJDQ/tAUAAXzvxZz33rmn7leYDYfBP+YoMRSENhf3zJyx3SBASt/OfeQwBHA1nxMis7mM3EV/oYT6Fdw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/solid.min.css" integrity="sha512-yDUXOUWwbHH4ggxueDnC5vJv4tmfySpVdIcN1LksGZi8W8EVZv4uKGrQc0pVf66zS7LDhFJM7Zdeow1sw1/8Jw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+		<link rel="stylesheet" href="style.css">
+		<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1463952185823163" crossorigin="anonymous"></script>
+	</head>
+	<body>
+		<div class="w3-bar w3-border w3-light-grey w3-large">
+			<a href="index.html" class="w3-bar-item w3-button">Precio Luz</a>
+			<a href="facturaPVPC.html" class="w3-bar-item w3-button w3-blue"><b>Factura PVPC</b></a>
+			<a href="help.html" class="w3-bar-item w3-button">Ayuda</a>
+			<div class="toggle w3-bar-item w3-right w3-medium">
+				Modo oscuro
+				<input type="checkbox" id="toggleDarkMode" />
+				<label class="w3-cell-middle" for="toggleDarkMode"></label>
+			</div>
+		</div>
+		<div class="w3-panel">
+			<p></p>
+		</div>
+		<div class="w3-card-4 w3-round w3-content formBackground" style="max-width:600px">
+			<div class="w3-container w3-blue w3-round">
+				<h1>Simulador Factura PVPC</h1>
+			</div>
+			<form class="w3-container">
+				<div class="w3-section">
+					<div class="w3-container w3-cell w3-text-blue w3-left" style="width:50px"><i class="w3-xxlarge fa-solid fa-key"></i></div>
+					<div class="w3-container w3-cell" style="width:500px">
+						<input class="w3-input w3-border" id="ESIOSToken" type="text" placeholder="Token personal ESIOS">
+					</div>
+				</div>
+				<div class="w3-section">
+					<div class="w3-container w3-cell w3-text-blue w3-left" style="width:50px"><i class="w3-xxlarge fa-solid fa-bolt"></i></div>
+					<div class="w3-container w3-cell" style="width:330px">
+						<input class="w3-input w3-border" id="PowerP1" type="number" min="0" step="0.01" placeholder="Potencia contratada en punta (P1) en kWh">
+					</div>
+					<div class="w3-cell w3-cell-middle" style="width:200px">kWh en punta (P1)</div>
+				</div>
+				<div class="w3-section">
+					<div class="w3-container w3-cell w3-text-blue w3-left" style="width:50px"><i class="w3-xxlarge fa-solid fa-bolt"></i></div>
+					<div class="w3-container w3-cell" style="width:330px">
+						<input class="w3-input w3-border" id="PowerP3" type="number" min="0" step="0.01" placeholder="Potencia contratada en valle (P3) en kWh">
+					</div>
+					<div class="w3-cell w3-cell-middle" style="width:200px">kWh en valle (P3)</div>
+				</div>
+				<div class="w3-section">
+					<div class="w3-container w3-cell w3-text-blue w3-left" style="width:50px"><i class="w3-xxlarge fa-solid fa-file-csv"></i></div>
+					<div class="w3-container w3-cell">
+						<button class="w3-button w3-white w3-border w3-round" type="button" onClick="document.getElementById('csv-file').click()">CSV de e-distribución o Enphase</button>
+						<input type='file' id="csv-file" accept=".csv" style="display:none">
+					</div>
+					<div class="w3-cell w3-cell-middle">
+						<a href="help.html">¿Cómo conseguir los ficheros CSV?</a>
+					</div>
+				</div>
+				<div class="w3-section">
+					<div class="w3-container w3-cell w3-text-blue w3-left" style="width:50px"><!--<i class="w3-xxlarge fa-solid fa-stopwatch-20"></i>--></div>
+					<div class="w3-container w3-cell" id="SelfConsVis" style="visibility: hidden;">
+						<input class="w3-check" type="checkbox" id="SimulateSelfConsumption">
+						<label>Simular autoconsumo</label>
+					</div>
+				</div>			</form>
+			<div class="w3-container w3-center">
+				<form action="https://www.paypal.com/donate" method="post" target="_blank">
+					<input type="hidden" name="business" value="9QZW8HK69FNXL" />
+					<input type="hidden" name="no_recurring" value="0" />
+					<input type="hidden" name="item_name" value="Gracias a su donativo contribuye a que pueda dedicarme a lo que me gusta, que es programar, y poder crear este tipo de utilidades." />
+					<input type="hidden" name="currency_code" value="EUR" />
+					<input type="image" src="https://www.paypalobjects.com/es_ES/ES/i/btn/btn_donate_LG.gif" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Botón Donar con PayPal" />
+					<img alt="" src="https://www.paypal.com/es_ES/i/scr/pixel.gif" width="1" height="1" />
+				</form>
+			</div>
+		</div>
+		<div class="w3-panel">
+			<p></p>
+		</div>
+		<div class="w3-card-4 w3-content factura" id="bill">
+			<div class="w3-large w3-center">
+				<p>Factura simulada a partir de un CSV de <span id="simulationType">e-distribución</span></p>
+			</div>
+			<h6 class="importeFacturaRect">DATOS DE LA FACTURA DE ELECTRICIDAD</h6>
+			<div class="importeFacturaRect pinkRect" >
+				<h4 class="importeFactura">IMPORTE FACTURA:<span class="w3-margin-left" id="importeFactura">32,48</span><span> €</span></h4>
+				<p class="importeFactura">
+					Nº factura: <span id="billCounter">00000000000000</span> emitida el <span id="emissionDate">07 de marzo de 2023</span><br>
+					Periodo de consumo: <span id="startDate">07 de febrero de 2023</span> a <span id="endDate">26 de febrero de 2023</span>
+				</p>
+			</div>
+			<h6 class="titleRect">RESUMEN DE LA FACTURA</h6>
+			<div class="pinkRect resumenFactura">
+				<table class="fullWidthTable">
+					<tr>
+						<td>Por potencia contratada</td>
+						<td class="billValuesRightAlign"><span id="forHiredPotency">5,36</span><span> €</span></td>
+					</tr>
+					<tr>
+						<td>Por energía consumida</td>
+						<td class="billValuesRightAlign"><span id="forEnergyConsumed">15,05</span><span> €</span></td>
+					</tr>
+					<tr>
+						<td>Por energía excedentaria</td>
+						<td class="billValuesRightAlign"><span id="forEnergyExcess">9,04</span><span> €</span></td>
+					</tr>
+					<tr>
+						<td>Impuesto electricidad</td>
+						<td class="billValuesRightAlign"><span id="electricityTaxResume">0,10</span><span> €</span></td>
+					</tr>
+					<tr>
+						<td>IVA normal</td>
+						<td class="billValuesRightAlign"><span id="normalVAT">1,03</span><span> €</span></td>
+					</tr>
+					<tr>
+						<td class="dotLine"></td>
+						<td class="dotLine"></td>
+					</tr>
+					<tr>
+						<td><h6 class="totalResumenFactura">TOTAL IMPORTE FACTURA</h6></td>
+						<td class="billValuesRightAlign"><h6 class="totalResumenFactura"><span id="totalResumenFactura">32,48</span><span> €</span></h6></td>
+					</tr>
+				</table>
+			</div>
+			<h6 class="titleRect">DATOS DEL CONTRATO</h6>
+			<div class="pinkRect fullWidthDiv">
+				Tipo de contrato: <b>PVPC - MERCADO REGULADO</b><br>
+				Peaje de transporte y distribución: 2.0TD Segmento de cargos: 1<br>
+				<span class="pinkText">Potencia contratada en punta: <span data-decimals="3" id="hiredPotencyP1">3,450</span> kW Potencia contratada en valle: <span data-decimals="3" id="hiredPotencyP3">3,450</span> kW</span>
+			</div>
+			<h6 class="titleRect">DESGLOSE DE LA FACTURA</h6>
+			<div class="pinkRect fullWidthDiv">
+				<table class="fullWidthTable smallFont">
+					<tr>
+						<td colspan="2"><b>Facturación por potencia contratada <span class="pinkText">("TÉRMINO FIJO")</span></b></td>
+						<td class="billValuesRightAlign"><b><span id="forHiredPotencyDetails">5,36</span><span> €</span></b></td>
+					</tr>
+					<tr>
+						<td colspan="2">Importe por peajes de transporte y distribución y cargos:</td>
+					</tr>
+					<tr>
+						<td class="desgloseFacturaColumn1">P1 (punta)</td>
+						<td class="horizontal_dotted_line"><span data-decimals="3" id="hiredPotencyP1_2">3,45</span>&nbsp;kW x&nbsp;<span data-decimals="6" id="fixedPriceP1">25,383055</span>&nbsp;Eur/kW y año x (<span id="billDays_1">19</span>/<span id="yearDays_1">365</span>) días<span class="dot"></span></td>
+						<td class="billValuesRightAlign"><span id="fixedTermP1">4,56</span> €</td>
+					</tr>
+					<tr>
+						<td>P3 (valle)</td>
+						<td class="horizontal_dotted_line"><span data-decimals="3" id="hiredPotencyP3_2">3,45</span>&nbsp;kW x&nbsp;<span data-decimals="6" id="fixedPriceP3">1,342713</span>&nbsp;Eur/kW y año x (<span id="billDays_2">19</span>/<span id="yearDays_2">365</span>) días<span class="dot"></span></td>
+						<td class="billValuesRightAlign"><span id="fixedTermP3">0,24</span> €</td>
+					</tr>
+					<tr>
+						<td><br></td>
+					</tr>
+					<tr>
+						<td>Margen de comercialización fijo:</td>
+						<td class="horizontal_dotted_line"><span data-decimals="3" id="hiredPotencyP1_3">3,45</span>&nbsp;kW x&nbsp;<span data-decimals="3" id="fixedTermCosts">3,113</span>&nbsp;Eur/kW y año x (<span id="billDays_3">19</span>/<span id="yearDays_3">365</span>) días<span class="dot"></span></td>
+						<td class="billValuesRightAlign"><span id="fixedMargin">0,56</span> €</td>
+					</tr>
+					<tr>
+						<td><br></td>
+					</tr>
+					<tr>
+						<td colspan="2"><b>Facturación por energía consumida <span class="pinkText">("TÉRMINO VARIABLE")</span></b></td>
+						<td class="billValuesRightAlign"><b><span id="variableTerm">15,05</span> €</b></td>
+					</tr>
+					<tr>
+						<td colspan="2">Importe por peajes de transporte y distribución y cargos:</td>
+					</tr>
+					<tr>
+						<td>P1 (punta)</td>
+						<td class="horizontal_dotted_line"><span data-decimals="3" id="consumedP1">19</span>&nbsp;kWh x&nbsp;<span data-decimals="6" id="variablePriceP1">0,072991</span>&nbsp;Eur/kWh<span class="dot"></span></td>
+						<td class="billValuesRightAlign"><span id="variableTermP1">1,39</span> €</td>
+					</tr>
+					<tr>
+						<td>P2 (llano)</td>
+						<td class="horizontal_dotted_line"><span data-decimals="3" id="consumedP2">13</span>&nbsp;kWh x&nbsp;<span data-decimals="6" id="variablePriceP2">0,028573</span>&nbsp;Eur/kWh<span class="dot"></span></td>
+						<td class="billValuesRightAlign"><span id="variableTermP2">0,37</span> €</td>
+					</tr>
+					<tr>
+						<td>P3 (valle)</td>
+						<td class="horizontal_dotted_line"><span data-decimals="3" id="consumedP3">40</span>&nbsp;kWh x&nbsp;<span data-decimals="6" id="variablePriceP3">0,003175</span>&nbsp;Eur/kWh<span class="dot"></span></td>
+						<td class="billValuesRightAlign"><span id="variableTermP3">0,13</span> €</td>
+					</tr>
+					<tr>
+						<td><br></td>
+					</tr>
+					<tr>
+						<td>Costes de la energía</td>
+						<td class="horizontal_dotted_line"><span class="dot"></span></td>
+						<td class="billValuesRightAlign"><span id="energyCosts">13,16</span> €</td>
+					</tr>
+					<tr>
+						<td><br></td>
+					</tr>
+					<tr>
+						<td><b>Fact. excedentes autoconsumo</b></td>
+						<td class="horizontal_dotted_line"><span class="dot"></span></td>
+						<td class="billValuesRightAlign"><b><span id="excessSales">-9,04</span> €</b></td>
+					</tr>
+					<tr>
+						<td><b>Ajuste límite de compensación por autoconsumo</b></td>
+						<td class="horizontal_dotted_line"><span class="dot"></span></td>
+						<td class="billValuesRightAlign"><b><span id="compensationLimit">9,04</span> €</b></td>
+					</tr>
+					<tr>
+						<td><br></td>
+					</tr>
+					<tr>
+						<td><b>Impuesto electricidad (CIM):</b></td>
+						<td class="horizontal_dotted_line"><span data-decimals="3" id="consumedMWh">20,41</span> MWh x 1,00 Eur/MWh<span class="dot"></span></td>
+						<td class="billValuesRightAlign"><b><span id="electricityTax">0,10</span> €</b></td>
+					</tr>
+					<tr>
+						<td><br></td>
+					</tr>
+					<tr>
+						<td><b>IVA normal:</b></td>
+						<td class="horizontal_dotted_line">5% s/&nbsp;<span id="taxBase">20,51</span><span class="dot"></span></td>
+						<td class="billValuesRightAlign"><b><span id="VAT">1,03</span> €</b></td>
+					</tr>
+					<tr>
+						<td><br></td>
+					</tr>
+					<tr>
+						<td><b>TOTAL IMPORTE FACTURA</b></td>
+						<td></td>
+						<td class="billValuesRightAlign"><b><span id="totalAmount">32,48</span> €</b></td>
+					</tr>
+					<tr>
+						<td colspan="3">
+							Precios de los términos del peaje de transporte y distribución, de los cargos, del contador y margen de comercialización fijo según normativa en vigor PVPC calculado según Real Decreto RD 216/2014 (BOE 29-03-2014)<br>
+							En virtud del Real Decreto-ley 12/2021, de 24 de junio, el IVA aplicable a su factura se encuentra reducido del 21% al 5%.<br>
+							En virtud del Real Decreto-ley 17/2021, de 14 de septiembre, el impuesto especial sobre la electricidad aplicable a su factura se encuentra reducido del 5,11269632% al 0,5%.
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<script>
+				function detectColorScheme(){
+				var theme = "light";
+				if (localStorage.getItem("theme")) {
+					if (localStorage.getItem("theme") == "dark")
+						theme = "dark";
+				}
+				else if (!window.matchMedia)
+					return false;
+				else if (window.matchMedia("(prefers-color-scheme: dark)").matches)
+					theme = "dark";
+
+				if (theme == "dark")
+					document.documentElement.setAttribute("data-theme", "dark");
+			}
+			detectColorScheme();
+
+			const toggleDM = document.getElementById('toggleDarkMode');
+			toggleDM.addEventListener('input', e => {
+				if (e.target.checked) {
+					localStorage.setItem('theme', 'dark');
+					document.documentElement.setAttribute('data-theme', 'dark');
+				} else {
+					localStorage.setItem('theme', 'light');
+					document.documentElement.setAttribute('data-theme', 'light');
+				}
+			});
+			if (document.documentElement.getAttribute("data-theme") == "dark")
+				toggleDM.checked = true;
+		</script>
+		<script type='module'>
+			// Import the functions you need from the SDKs you need
+			import { initializeApp } from "https://www.gstatic.com/firebasejs/9.20.0/firebase-app.js";
+			import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.20.0/firebase-analytics.js";
+			import { getFirestore, doc, getDoc, updateDoc, increment } from "https://www.gstatic.com/firebasejs/9.20.0/firebase-firestore.js";
+
+			function getBillCounterDocRef() { return doc(getFirestore(), 'globalData', 'billCounter'); }
+			async function getBillCounter() {
+				try {
+					const billCounterSnap = await getDoc(getBillCounterDocRef());
+					return billCounterSnap.data().counter;
+				}
+				catch(error) {
+					console.error('Error writing new message to Firebase Database', error);
+					return 0;
+				}
+			}
+			async function incrementBillCounter() {
+				try {
+					var counter = await getBillCounter();
+					updateDoc(getBillCounterDocRef(), 'counter', counter + 1);
+				}
+				catch(error) {
+					console.error('Error writing new message to Firebase Database', error);
+				}
+			}
+			async function readBillCounter() {
+				function pad(num) {
+					const zeros = "00000000000000"
+					var s = zeros + num;
+					return s.substr(s.length-zeros.length);
+				}
+				var counter = await getBillCounter();
+				document.getElementById('billCounter').innerHTML = pad(counter);
+			}
+
+			var lastCSV;
+			function readSingleFile(e) {
+				var file = e.target.files[0];
+				if (!file)
+					return;
+				
+				const edistribucion = e.currentTarget.id == "csv-file";
+				var reader = new FileReader();
+				reader.onload = function(e) {
+					readBillCounter();
+					lastCSV = e.target.result;
+					Module.importBillCSV(e.target.result);
+					incrementBillCounter();
+				};
+				reader.readAsText(file);
+			}
+			function updateBill(e) {
+				if (lastCSV != null)
+					Module.importBillCSV(lastCSV);
+			}
+			document.getElementById('csv-file').addEventListener('change', readSingleFile, false);
+			document.getElementById('PowerP1').addEventListener('change', updateBill, false);
+			document.getElementById('PowerP3').addEventListener('change', updateBill, false);
+			document.getElementById('SimulateSelfConsumption').addEventListener('change', updateBill, false);
+
+			import EXPORT_NAME from './FacturaPVPC.js'
+			const Module = await EXPORT_NAME({
+				printWithColors: true,
+				print: function(text) { console.log(text); },
+				printErr: function(text) { console.error(text); },
+				firebase: {
+					initializeApp: initializeApp,
+					getAnalytics: getAnalytics
+				}
+			});
+		</script>
+	</body>
+</html>

@@ -5,278 +5,294 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1">
 		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/fontawesome.min.css" integrity="sha512-SgaqKKxJDQ/tAUAAXzvxZz33rmn7leYDYfBP+YoMRSENhf3zJyx3SBASt/OfeQwBHA1nxMis7mM3EV/oYT6Fdw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/solid.min.css" integrity="sha512-yDUXOUWwbHH4ggxueDnC5vJv4tmfySpVdIcN1LksGZi8W8EVZv4uKGrQc0pVf66zS7LDhFJM7Zdeow1sw1/8Jw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 		<link rel="stylesheet" href="style.css">
+		<script src="https://cdn.plot.ly/plotly-2.20.0.min.js" charset="utf-8"></script>
 		<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1463952185823163" crossorigin="anonymous"></script>
 	</head>
 	<body>
-		<h1>Simulador Factura PVPC</h1>
-		<h2>Con soporte para contratos de autoconsumo</h2>
-		<div class="w3-card-4 w3-round inputForm">
+		<div class="w3-bar w3-border w3-light-grey w3-large">
+			<a href="index.html" class="w3-bar-item w3-button w3-blue"><b>Precio Luz</b></a>
+			<a href="facturaPVPC.html" class="w3-bar-item w3-button">Factura PVPC</a>
+			<a href="help.html" class="w3-bar-item w3-button">Ayuda</a>
+			<div class="toggle w3-bar-item w3-right w3-medium">
+				Modo oscuro
+				<input type="checkbox" id="toggleDarkMode" />
+				<label class="w3-cell-middle" for="toggleDarkMode"></label>
+			</div>
+		</div>
+		<div class="w3-panel">
+			<p></p>
+		</div>
+		<div class="w3-card-4 w3-round w3-content formBackground" style="max-width:490px">
 			<div class="w3-container w3-blue w3-round">
-				<h2>Simulador Factura PVPC</h2>
+				<h1>Precio de la luz por horas</h1>
 			</div>
-			<form class="w3-container">
-				<div class="w3-section">
-					<div class="w3-col w3-text-blue" style="width:50px"><i class="w3-xxlarge fa-solid fa-key"></i></div>
-					<div class="w3-rest">
-						<input class="w3-input w3-border" id="ESIOSToken" type="text" placeholder="Token personal ESIOS">
-					</div>
+			<h3 class="w3-margin-left">Elige el rango de fechas a consultar</h3>
+			<div class="w3-row-padding">
+				<div class="w3-half">
+					<label>Fecha de inicio</label>
+					<input class="w3-input w3-border" id="startDate" type="date">
 				</div>
-				<div class="w3-section">
-					<div class="w3-col w3-left w3-text-blue" style="width:50px"><i class="w3-xxlarge fa-solid fa-bolt"></i></div>
-					<div class="w3-col w3-right" style="width:50px"><p style="margin-left: 10px;">kWh</p></div>
-					<div class="w3-rest">
-						<input class="w3-input w3-border" id="PowerP1" type="number" min="0" step="0.01" placeholder="Potencia contratada en punta (P1) en kWh">
-					</div>
+				<div class="w3-half">
+					<label>Fecha de fin</label>
+					<input class="w3-input w3-border" id="endDate" type="date">
 				</div>
-				<div class="w3-section">
-					<div class="w3-col w3-left w3-text-blue" style="width:50px"><i class="w3-xxlarge fa-solid fa-bolt"></i></div>
-					<div class="w3-col w3-right" style="width:50px"><p style="margin-left: 10px;">kWh</p></div>
-					<div class="w3-rest">
-						<input class="w3-input w3-border" id="PowerP3" type="number" min="0" step="0.01" placeholder="Potencia contratada en valle (P3) en kWh">
-					</div>
-				</div>
-				<div class="w3-section">
-					<div class="w3-col w3-text-blue" style="width:50px"><i class="w3-xxlarge fa-solid fa-stopwatch-20"></i></div>
-					<div class="w3-rest">
-						<input class="w3-check" type="checkbox" id="MeterRental">
-						<label>Alquiler del contador</label>
-					</div>
-				</div>
-				<div class="w3-section">
-					<div class="w3-col w3-text-blue" style="width:50px"><i class="w3-xxlarge fa-solid fa-file-csv"></i></div>
-					<div class="w3-rest">
-						<button class="w3-button w3-white w3-border w3-round" type="button" onClick="document.getElementById('csv-file-input').click()">Seleciona fichero CSV de consumos</button>
-						<input type='file' id="csv-file-input" accept=".csv" style="display:none">
-					</div>
-				</div>
-			</form>
-			<div class="w3-section">
-				<form action="https://www.paypal.com/donate" method="post" target="_blank">
-					<input type="hidden" name="business" value="9QZW8HK69FNXL" />
-					<input type="hidden" name="no_recurring" value="0" />
-					<input type="hidden" name="item_name" value="Gracias a su donativo contribuye a que pueda dedicarme a lo que me gusta, que es programar, y poder crear este tipo de utilidades." />
-					<input type="hidden" name="currency_code" value="EUR" />
-					<input type="image" src="https://www.paypalobjects.com/es_ES/ES/i/btn/btn_donate_LG.gif" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Botón Donar con PayPal" />
-					<img alt="" src="https://www.paypal.com/es_ES/i/scr/pixel.gif" width="1" height="1" />
-				</form>
+			</div>
+			<div class="w3-margin-left w3-margin-right w3-panel w3-leftbar w3-rightbar w3-border-blue" style="background-color:rgba(150,255,255,0.2)">
+				<label><p>El intervalo máximo es de un mes</p></label>
+			</div>
+			<div class="w3-padding"></div>
+		</div>
+		<div class="w3-panel">
+			<p></p>
+		</div>
+		<div class="w3-card-4 w3-round w3-content w3-row w3-center formBackground" style="max-width:1100px">
+			<div class="w3-third w3-container">
+				<h3 class="w3-bottombar w3-border-blue">Precio más bajo</h3>
+				<h1 class="w3-text-green"><span id="minCost">0.00000</span> €/kWh</h1>
+				<label id="minCostDate"></label>
+			</div>
+			<div class="w3-third w3-container">
+				<h3 class="w3-bottombar w3-border-blue">Precio medio</h3>
+				<h1 class="w3-text-yellow"><span id="middleCost">0.00000</span> €/kWh</h1>
+			</div>
+			<div class="w3-third w3-container">
+				<h3 class="w3-bottombar w3-border-blue">Precio más alto</h3>
+				<h1 class="w3-text-red"><span id="maxCost">0.00000</span> €/kWh</h1>
+				<label id="maxCostDate"></label>
+			</div>
+			<div class="w3-panel">
+				<p></p>
 			</div>
 		</div>
-		<div class="factura w3-card-4">
-			<h6 class="importeFacturaRect">DATOS DE LA FACTURA DE ELECTRICIDAD</h6>
-			<div class="importeFacturaRect pinkRect" >
-				<h4 class="importeFactura">IMPORTE FACTURA:<span>32,48 €</span></h4>
-				<p class="importeFactura">
-					Nº factura: 00000000000000 emitida el 07 de marzo de 2023<br>
-					Periodo de consumo:07 de febrero de 2023 a 26 de febrero de 2023<br>
-					Fecha de cargo:09 de marzo de 2023
-				</p>
-			</div>
-			<h6 class="titleRect">RESUMEN DE LA FACTURA</h6>
-			<div class="pinkRect resumenFactura">
-				<table class="fullWidthTable">
-					<tr>
-						<td>Por potencia contratada</td>
-						<td class="billValuesRightAlign">5,36 €</td>
-					</tr>
-					<tr>
-						<td>Por energía consumida</td>
-						<td class="billValuesRightAlign">15,05 €</td>
-					</tr>
-					<tr>
-						<td>Regularización y otros conceptos</td>
-						<td class="billValuesRightAlign">9,04 €</td>
-					</tr>
-					<tr>
-						<td>Impuesto electricidad</td>
-						<td class="billValuesRightAlign">0,10 €</td>
-					</tr>
-					<tr>
-						<td>IVA normal</td>
-						<td class="billValuesRightAlign">1,90 €</td>
-					</tr>
-					<tr>
-						<td>IVA normal</td>
-						<td class="billValuesRightAlign">1,03 €</td>
-					</tr>
-					<tr>
-						<td class="dotLine"></td>
-						<td class="dotLine"></td>
-					</tr>
-					<tr>
-						<td><h6 class="totalResumenFactura">TOTAL IMPORTE FACTURA</h6></td>
-						<td class="billValuesRightAlign"><h6 class="totalResumenFactura">32,48 €</h6></td>
-					</tr>
-				</table>
-			</div>
-			<h6 class="titleRect">DATOS DEL CONTRATO</h6>
-			<div class="pinkRect fullWidthDiv">
-				Tipo de contrato: <b>PVPC - MERCADO REGULADO</b><br>
-				Peaje de transporte y distribución: 2.0TD Segmento de cargos: 1<br>
-				Potencia contratada en punta: 3,450 kW Potencia contratada en valle: 3,450 kW<br>
-			</div>
-			<h6 class="titleRect">DESGLOSE DE LA FACTURA</h6>
-			<div class="pinkRect fullWidthDiv">
-				<table class="fullWidthTable smallFont">
-					<tr>
-						<td colspan="2"><b>Facturación por potencia contratada <span class="pinkText">("TÉRMINO FIJO")</span></b></td>
-						<td class="billValuesRightAlign"><b>5,36 €</b></td>
-					</tr>
-					<tr>
-						<td colspan="2">Importe por peajes de transporte y distribución y cargos:</td>
-					</tr>
-					<tr>
-						<td class="desgloseFacturaColumn1">P1 (punta)</td>
-						<td class="horizontal_dotted_line">3,45 kW x 25,383055 Eur/kW y año x (19/365) días<span class="dot"></span></td>
-						<td class="billValuesRightAlign">4,56 €</td>
-					</tr>
-					<tr>
-						<td>P3 (valle)</td>
-						<td class="horizontal_dotted_line">3,45 kW x 1,342713 Eur/kW y año x (19/365) días<span class="dot"></span></td>
-						<td class="billValuesRightAlign">0,24 €</td>
-					</tr>
-					<tr>
-						<td><br></td>
-					</tr>
-					<tr>
-						<td>Margen de comercialización fijo:</td>
-						<td class="horizontal_dotted_line">3,45 kW x 3,113 Eur/kW y año x (19/365) días<span class="dot"></span></td>
-						<td class="billValuesRightAlign">0,56 €</td>
-					</tr>
-					<tr>
-						<td><br></td>
-					</tr>
-					<tr>
-						<td colspan="2"><b>Facturación por energía consumida <span class="pinkText">("TÉRMINO VARIABLE")</span></b></td>
-						<td class="billValuesRightAlign"><b>15,05 €</b></td>
-					</tr>
-					<tr>
-						<td colspan="2">Importe por peajes de transporte y distribución y cargos:</td>
-					</tr>
-					<tr>
-						<td>P1 (punta)</td>
-						<td class="horizontal_dotted_line">19 kWh x 0,072991 Eur/kWh<span class="dot"></span></td>
-						<td class="billValuesRightAlign">1,39 €</td>
-					</tr>
-					<tr>
-						<td>P2 (llano)</td>
-						<td class="horizontal_dotted_line">13 kWh x 0,028573 Eur/kWh<span class="dot"></span></td>
-						<td class="billValuesRightAlign">0,37 €</td>
-					</tr>
-					<tr>
-						<td>P3 (valle)</td>
-						<td class="horizontal_dotted_line">40 kWh x 0,003175 Eur/kWh<span class="dot"></span></td>
-						<td class="billValuesRightAlign">0,13 €</td>
-					</tr>
-					<tr>
-						<td>Costes de la energía</td>
-						<td class="horizontal_dotted_line"><span class="dot"></span></td>
-						<td class="billValuesRightAlign">13,16 €</td>
-					</tr>
-					<tr>
-						<td><br></td>
-					</tr>
-					<tr>
-						<td><br></td>
-					</tr>
-					<tr>
-						<td><b>Otros conceptos</b></td>
-						<td></td>
-						<td class="billValuesRightAlign"><b>9,04 €</b></td>
-					</tr>
-					<tr>
-						<td><br></td>
-					</tr>
-					<tr>
-						<td><b>Impuesto electricidad:</b></td>
-						<td class="horizontal_dotted_line">( 20,41 X 0,500000 % )<span class="dot"></span></td>
-						<td class="billValuesRightAlign"><b>0,10 €</b></td>
-					</tr>
-					<tr>
-						<td><br></td>
-					</tr>
-					<tr>
-						<td><b>IVA normal:</b></td>
-						<td class="horizontal_dotted_line">5% s/ 20,51<span class="dot"></span></td>
-						<td class="billValuesRightAlign"><b>1,03 €</b></td>
-					</tr>
-					<tr>
-						<td><br></td>
-					</tr>
-					<tr>
-						<td><b>TOTAL IMPORTE FACTURA</b></td>
-						<td></td>
-						<td class="billValuesRightAlign"><b>32,48 €</b></td>
-					</tr>
-					<tr>
-						<td colspan="3">
-							Precios de los términos del peaje de transporte y distribución, de los cargos, del contador y margen de comercialización fijo según normativa en vigor PVPC calculado según Real Decreto RD 216/2014 (BOE 29-03-2014)<br>
-							En virtud del Real Decreto-ley 12/2021, de 24 de junio, el IVA aplicable a su factura se encuentra reducido del 21% al 5%.<br>
-							En virtud del Real Decreto-ley 17/2021, de 14 de septiembre, el impuesto especial sobre la electricidad aplicable a su factura se encuentra reducido del 5,11269632% al 0,5%.
-						</td>
-					</tr>
-				</table>
-			</div>
+		<div class="w3-panel">
+			<p></p>
 		</div>
-		<p>
-			<label for="billDays">Días de la factura</label>
-			<output id="billDays"></output><br>
-			<label for="yearDays">Días del año actual</label>
-			<output id="yearDays"></output><br>
-			<label for="fixedTerm"><b>Término fijo</b></label>
-			<output id="fixedTerm"></output><br>
-			<label for="fixedTermP1">Término fjio en punta</label>
-			<output id="fixedTermP1"></output><br>
-			<label for="fixedTermP3">Término fjio en valle</label>
-			<output id="fixedTermP3"></output><br>
-			<label for="fixedMargin">Margen de comercialización fijo</label>
-			<output id="fixedMargin"></output><br>
-			<label for="variableTerm"><b>Término variable</b></label>
-			<output id="variableTerm"></output><br>
-			<label for="variableTermP1">Término variable en punta</label>
-			<output id="variableTermP1"></output><br>
-			<label for="variableTermP2">Término variable en llano</label>
-			<output id="variableTermP2"></output><br>
-			<label for="variableTermP3">Término variable en valle</label>
-			<output id="variableTermP3"></output><br>
-			<label for="energyCosts">Término variable en Costes de la energía</label>
-			<output id="energyCosts"></output><br>
-			<label for="otherConcepts"><b>Otros conceptos</b></label>
-			<output id="otherConcepts"></output><br>
-			<label for="excessSales">FACT. EXCEDENTES AUTOCONSUMO</label>
-			<output id="excessSales"></output><br>
-			<label for="compensationLimit">Ajuste para límite de compensación</label>
-			<output id="compensationLimit"></output><br>
-			<label for="electricityTax"><b>Impuesto Electricidad</b></label>
-			<output id="electricityTax"></output><br>
-			<label for="VAT"><b>IVA normal</b></label>
-			<output id="VAT"></output><br>
-			<label for="totalAmount"><b>Total importe factura</b></label>
-			<output id="totalAmount"></output><br>
-		</p>
-		<script type='text/javascript'>
-			function readSingleFile(e) {
-				var file = e.target.files[0];
-				if (!file)
-					return;
-				
-				var reader = new FileReader();
-				reader.onload = function(e) {
-					Module.importBillCSV(e.target.result);
-				};
-				reader.readAsText(file);
+		<div class="w3-card-4 w3-content" style="max-width:1000px;height:500px" id="energyPricesChart"><p></p></div>
+	</body>
+	<script>
+		function detectColorScheme(){
+			var theme = "light";
+			if (localStorage.getItem("theme")) {
+				if (localStorage.getItem("theme") == "dark")
+					theme = "dark";
+			}
+			else if (!window.matchMedia)
+				return false;
+			else if (window.matchMedia("(prefers-color-scheme: dark)").matches)
+				theme = "dark";
+
+			if (theme == "dark")
+				document.documentElement.setAttribute("data-theme", "dark");
+		}
+		detectColorScheme();
+
+		const toggleDM = document.getElementById('toggleDarkMode');
+		toggleDM.addEventListener('input', e => {
+			if (e.target.checked) {
+				localStorage.setItem('theme', 'dark');
+				document.documentElement.setAttribute('data-theme', 'dark');
+			} else {
+				localStorage.setItem('theme', 'light');
+				document.documentElement.setAttribute('data-theme', 'light');
+			}
+		});
+		if (document.documentElement.getAttribute("data-theme") == "dark")
+			toggleDM.checked = true;
+	</script>
+	<script>
+		const today = new Date();
+		const starDateElement = document.getElementById("startDate")
+		const endDateElement = document.getElementById("endDate");
+		starDateElement.valueAsDate = today;
+		endDateElement.valueAsDate = today;
+
+		function dateToString(_date) {
+			return _date.toISOString().split("T")[0];
+		}
+
+		function animateValue(obj, end, duration) {
+			duration = duration * 1000
+			const start = Number(obj.innerHTML);
+			let startTimestamp = null;
+			const step = (timestamp) => {
+				if (!startTimestamp)
+					startTimestamp = timestamp;
+				const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+				obj.innerHTML = (progress * (end - start) + start).toFixed(5);
+				if (progress < 1)
+					window.requestAnimationFrame(step);
+			};
+			window.requestAnimationFrame(step);
+		}
+
+		var oldDates = null;
+		function updateLightPriceChart(_startDate, _endDate) {
+			function displayChart(jsonData) {
+				const valuesJson = jsonData["included"][0]["attributes"]["values"];
+				var minCost = 1000;
+				var maxCost = -1000;
+				var minCostDate = null;
+				var maxCostDate = null;
+				var sumCosts = 0;
+				const dates = valuesJson.map(function(value) {
+					return new Date(value.datetime);
+				});
+				const energyCosts = valuesJson.map(function(value, index) {
+					const eurPerkWh = value.value / 1000.0;
+					if (eurPerkWh < minCost)
+					{
+						minCost = eurPerkWh;
+						minCostDate = dates[index];
+					}
+					if (eurPerkWh > maxCost)
+					{
+						maxCost = eurPerkWh;
+						maxCostDate = dates[index];
+					}
+					sumCosts += eurPerkWh;
+					return eurPerkWh;
+				});
+				const zeros = valuesJson.map(function(value, index) {
+					const date = dates[index];
+					if (oldDates == null || date < oldDates[0] || date > oldDates[oldDates.length-1])
+						return 0;
+					else
+						return energyCosts[index];
+				});
+
+				var energyPricesChart = document.getElementById('energyPricesChart');
+				const maxChart = maxCost * 1.05;
+				const minChart = minCost > 0 ? 0 : minCost;
+
+				function newPlot() {
+					const style = window.getComputedStyle(document.body);
+					const bgColor = style.getPropertyValue('background-color');
+					const textColor = style.getPropertyValue('color');
+					const layout = {
+						title: {
+							text: jsonData.data.type,
+							font: {
+								color: textColor
+							}
+						},
+						xaxis: {
+							title: 'Fecha',
+							color: textColor,
+							range: [dates[0], dates[dates.length-1]]
+						},
+						yaxis: {
+							title: 'PVPC (€/kWh)',
+							color: textColor,
+							range: [minChart, maxChart]
+						},
+						plot_bgcolor: bgColor,
+						paper_bgcolor: bgColor
+					};
+					const config = {
+						responsive: true,
+						modeBarButtonsToRemove: ['select2d', 'lasso2d', 'zoomIn2d', 'zoomOut2d', 'autoScale2d' ],
+						//displayModeBar: false
+					};
+					const data = [
+						{
+							x: dates,
+							y: zeros,
+							line: {shape: 'spline'},
+							//mode: 'lines+markers',
+						}
+					];
+					Plotly.newPlot(energyPricesChart, data, layout, config).then(function() {
+						Plotly.animate(energyPricesChart, {
+								data: [{y: energyCosts}]
+							}, {
+								transition: {
+									duration: 500,
+									easing: 'cubic-in-out'
+								}
+							}
+						);
+					});
+
+					animateValue(document.getElementById("minCost"), minCost, 0.5);
+					animateValue(document.getElementById("maxCost"), maxCost, 0.5);
+					animateValue(document.getElementById("middleCost"), sumCosts / energyCosts.length, 0.5);
+					document.getElementById("minCostDate").innerHTML = new Intl.DateTimeFormat('es-ES', { dateStyle: 'full', timeStyle: 'short' }).format(minCostDate);
+					document.getElementById("maxCostDate").innerHTML = new Intl.DateTimeFormat('es-ES', { dateStyle: 'full', timeStyle: 'short' }).format(maxCostDate);
+				}
+
+				if (oldDates != null)
+				{
+					Plotly.animate(energyPricesChart, {
+							layout: {
+								xaxis: {
+									range: [dates[0], dates[dates.length-1]]
+								},
+								yaxis: {
+									range: [minChart, maxChart]
+								}
+							}
+						}, {
+							transition: {
+								duration: 500,
+								easing: 'cubic-in-out'
+							}
+						}
+					).then(newPlot);
+				}
+				else
+					newPlot();
+				oldDates = dates;
 			}
 
-			document.getElementById('csv-file-input').addEventListener('change', readSingleFile, false);
-			var Module = {
-				'printWithColors': true,
-				'print': function(text) { console.log(text); },
-				'printErr': function(text) { console.error(text); },
-			};
-		</script>
-		<script async type="text/javascript" src="FacturaPVPC.js"></script>
-	</body>
+			const url = "https://apidatos.ree.es/es/datos/mercados/precios-mercados-tiempo-real?start_date=" + dateToString(_startDate) + "T00:00&end_date=" + dateToString(_endDate) + "T23:59&time_trunc=hour";
+			fetch(url).then(function(response) {
+				return response.json();
+			}).then(function(data) {
+				displayChart(data);
+			}).catch(function(err) {
+				console.error('Ferch Error: ', err);
+			});
+		}
+
+		function refreshLightPricesChart() {
+			if (starDateElement.valueAsDate != null)
+			{
+				var tomorrow = new Date();
+				tomorrow.setDate(tomorrow.getDate() + 1);
+				var maxLimit = starDateElement.valueAsDate;
+				maxLimit.setMonth(maxLimit.getMonth() + 1);
+				if (tomorrow < maxLimit)
+					maxLimit = tomorrow;
+				endDateElement.setAttribute('max', dateToString(maxLimit));
+				endDateElement.setAttribute('min', dateToString(starDateElement.valueAsDate));
+			}
+			else
+			{
+				endDateElement.removeAttribute('max');
+				endDateElement.removeAttribute('min');
+			}
+
+			if (endDateElement.valueAsDate != null)
+			{
+				var minLimit = endDateElement.valueAsDate;
+				minLimit.setMonth(minLimit.getMonth() - 1);
+				minLimit.setDate(minLimit.getDate() + 1);
+				starDateElement.setAttribute('min', dateToString(minLimit));
+				starDateElement.setAttribute('max', dateToString(endDateElement.valueAsDate));
+			}
+			else
+			{
+				starDateElement.removeAttribute('max');
+				starDateElement.removeAttribute('min');
+			}
+
+			if (starDateElement.valueAsDate != null && endDateElement.valueAsDate != null)
+				updateLightPriceChart(starDateElement.valueAsDate, endDateElement.valueAsDate);
+		}
+		refreshLightPricesChart();
+
+		starDateElement.addEventListener('change', refreshLightPricesChart, false);
+		endDateElement.addEventListener('change', refreshLightPricesChart, false);
+	</script>
 </html>
